@@ -58,26 +58,20 @@ const options = {
   module: {
     rules: [
       {
-        // look for .css or .scss files
-        test: /\.(css|scss)$/,
-        // in the `src` directory
         use: [
-          {
-            loader: 'style-loader',
-          },
-          {
-            loader: 'css-loader',
-          },
-          {
-            loader: 'sass-loader',
-            options: {
-              sourceMap: true,
-            },
-          },
+          'style-loader',
+          'css-loader',
           {
             loader: 'postcss-loader',
+            options: {
+              postcssOptions: {
+                ident: 'postcss',
+                plugins: ['tailwindcss', 'autoprefixer'],
+              },
+            },
           },
         ],
+        test: /\.css$/i,
       },
       {
         test: new RegExp('.(' + fileExtensions.join('|') + ')$'),
