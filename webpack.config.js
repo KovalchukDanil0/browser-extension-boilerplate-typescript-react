@@ -1,57 +1,58 @@
-const webpack = require('webpack'),
-  path = require('path'),
-  fileSystem = require('fs-extra'),
-  env = require('./utils/env'),
-  CopyWebpackPlugin = require('copy-webpack-plugin'),
-  HtmlWebpackPlugin = require('html-webpack-plugin'),
-  TerserPlugin = require('terser-webpack-plugin');
-const { CleanWebpackPlugin } = require('clean-webpack-plugin');
-const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
-const ReactRefreshTypeScript = require('react-refresh-typescript');
+const webpack = require("webpack"),
+  path = require("path"),
+  fileSystem = require("fs-extra"),
+  env = require("./utils/env"),
+  CopyWebpackPlugin = require("copy-webpack-plugin"),
+  HtmlWebpackPlugin = require("html-webpack-plugin"),
+  TerserPlugin = require("terser-webpack-plugin");
+const { CleanWebpackPlugin } = require("clean-webpack-plugin");
+const ReactRefreshWebpackPlugin = require("@pmmmwh/react-refresh-webpack-plugin");
+const ReactRefreshTypeScript = require("react-refresh-typescript");
+const pkg = require("./package.json");
 
-const ASSET_PATH = process.env.ASSET_PATH || '/';
+const ASSET_PATH = process.env.ASSET_PATH || "/";
 
 const alias = {};
 
 // load the secrets
-const secretsPath = path.join(__dirname, 'secrets.' + env.NODE_ENV + '.js');
+const secretsPath = path.join(__dirname, `secrets.${env.NODE_ENV}.js`);
 
 const fileExtensions = [
-  'jpg',
-  'jpeg',
-  'png',
-  'gif',
-  'eot',
-  'otf',
-  'svg',
-  'ttf',
-  'woff',
-  'woff2',
+  "jpg",
+  "jpeg",
+  "png",
+  "gif",
+  "eot",
+  "otf",
+  "svg",
+  "ttf",
+  "woff",
+  "woff2",
 ];
 
 if (fileSystem.existsSync(secretsPath)) {
-  alias['secrets'] = secretsPath;
+  alias["secrets"] = secretsPath;
 }
 
-const isDevelopment = process.env.NODE_ENV !== 'production';
+const isDevelopment = process.env.NODE_ENV !== "production";
 
 const options = {
-  mode: process.env.NODE_ENV || 'development',
+  mode: process.env.NODE_ENV || "development",
   entry: {
-    newtab: path.join(__dirname, 'src', 'pages', 'Newtab', 'index.tsx'),
-    options: path.join(__dirname, 'src', 'pages', 'Options', 'index.tsx'),
-    popup: path.join(__dirname, 'src', 'pages', 'Popup', 'index.tsx'),
-    background: path.join(__dirname, 'src', 'pages', 'Background', 'index.ts'),
-    contentScript: path.join(__dirname, 'src', 'pages', 'Content', 'index.ts'),
-    devtools: path.join(__dirname, 'src', 'pages', 'Devtools', 'index.ts'),
-    panel: path.join(__dirname, 'src', 'pages', 'Panel', 'index.tsx'),
+    newtab: path.join(__dirname, "src", "pages", "Newtab", "index.tsx"),
+    options: path.join(__dirname, "src", "pages", "Options", "index.tsx"),
+    popup: path.join(__dirname, "src", "pages", "Popup", "index.tsx"),
+    background: path.join(__dirname, "src", "pages", "Background", "index.ts"),
+    contentScript: path.join(__dirname, "src", "pages", "Content", "index.ts"),
+    devtools: path.join(__dirname, "src", "pages", "Devtools", "index.ts"),
+    panel: path.join(__dirname, "src", "pages", "Panel", "index.tsx"),
   },
   chromeExtensionBoilerplate: {
-    notHotReload: ['background', 'contentScript', 'devtools'],
+    notHotReload: ["background", "contentScript", "devtools"],
   },
   output: {
-    filename: '[name].bundle.js',
-    path: path.resolve(__dirname, 'build'),
+    filename: "[name].bundle.js",
+    path: path.resolve(__dirname, "build"),
     clean: true,
     publicPath: ASSET_PATH,
   },
@@ -59,14 +60,14 @@ const options = {
     rules: [
       {
         use: [
-          'style-loader',
-          'css-loader',
+          "style-loader",
+          "css-loader",
           {
-            loader: 'postcss-loader',
+            loader: "postcss-loader",
             options: {
               postcssOptions: {
-                ident: 'postcss',
-                plugins: ['tailwindcss', 'autoprefixer'],
+                ident: "postcss",
+                plugins: ["tailwindcss", "autoprefixer"],
               },
             },
           },
@@ -74,8 +75,8 @@ const options = {
         test: /\.css$/i,
       },
       {
-        test: new RegExp('.(' + fileExtensions.join('|') + ')$'),
-        type: 'asset/resource',
+        test: new RegExp(`.(${fileExtensions.join("|")})$`),
+        type: "asset/resource",
         exclude: /node_modules/,
         // loader: 'file-loader',
         // options: {
@@ -84,7 +85,7 @@ const options = {
       },
       {
         test: /\.html$/,
-        loader: 'html-loader',
+        loader: "html-loader",
         exclude: /node_modules/,
       },
       {
@@ -92,11 +93,11 @@ const options = {
         exclude: /node_modules/,
         use: [
           {
-            loader: require.resolve('ts-loader'),
+            loader: require.resolve("ts-loader"),
             options: {
               getCustomTransformers: () => ({
                 before: [isDevelopment && ReactRefreshTypeScript()].filter(
-                  Boolean
+                  Boolean,
                 ),
               }),
               transpileOnly: isDevelopment,
@@ -108,13 +109,13 @@ const options = {
         test: /\.(js|jsx)$/,
         use: [
           {
-            loader: 'source-map-loader',
+            loader: "source-map-loader",
           },
           {
-            loader: require.resolve('babel-loader'),
+            loader: require.resolve("babel-loader"),
             options: {
               plugins: [
-                isDevelopment && require.resolve('react-refresh/babel'),
+                isDevelopment && require.resolve("react-refresh/babel"),
               ].filter(Boolean),
             },
           },
@@ -124,31 +125,32 @@ const options = {
     ],
   },
   resolve: {
-    alias: alias,
+    alias,
     extensions: fileExtensions
-      .map((extension) => '.' + extension)
-      .concat(['.js', '.jsx', '.ts', '.tsx', '.css']),
+      .map((extension) => "." + extension)
+      .concat([".js", ".jsx", ".ts", ".tsx", ".css"]),
   },
   plugins: [
     isDevelopment && new ReactRefreshWebpackPlugin(),
     new CleanWebpackPlugin({ verbose: false }),
     new webpack.ProgressPlugin(),
     // expose and write the allowed env vars on the compiled bundle
-    new webpack.EnvironmentPlugin(['NODE_ENV']),
+    new webpack.EnvironmentPlugin(["NODE_ENV"]),
     new CopyWebpackPlugin({
       patterns: [
         {
-          from: 'src/manifest.json',
-          to: path.join(__dirname, 'build'),
+          from: "src/manifest.json",
+          to: path.join(__dirname, "build"),
           force: true,
-          transform: function (content, path) {
+          transform(content, _path) {
             // generates the manifest file using the package.json informations
             return Buffer.from(
               JSON.stringify({
-                description: process.env.npm_package_description,
-                version: process.env.npm_package_version,
+                version: pkg.version,
+                description: pkg.description,
+                homepage_url: pkg.repository.url,
                 ...JSON.parse(content.toString()),
-              })
+              }),
             );
           },
         },
@@ -157,65 +159,65 @@ const options = {
     new CopyWebpackPlugin({
       patterns: [
         {
-          from: 'src/assets/img/icon-16.png',
-          to: path.join(__dirname, 'build'),
+          from: "src/assets/img/icon-16.png",
+          to: path.join(__dirname, "build"),
           force: true,
         },
         {
-          from: 'src/assets/img/icon-32.png',
-          to: path.join(__dirname, 'build'),
+          from: "src/assets/img/icon-32.png",
+          to: path.join(__dirname, "build"),
           force: true,
         },
         {
-          from: 'src/assets/img/icon-64.png',
-          to: path.join(__dirname, 'build'),
+          from: "src/assets/img/icon-64.png",
+          to: path.join(__dirname, "build"),
           force: true,
         },
         {
-          from: 'src/assets/img/icon-128.png',
-          to: path.join(__dirname, 'build'),
+          from: "src/assets/img/icon-128.png",
+          to: path.join(__dirname, "build"),
           force: true,
         },
       ],
     }),
     new HtmlWebpackPlugin({
-      template: path.join(__dirname, 'src', 'pages', 'Newtab', 'index.html'),
-      filename: 'newtab.html',
-      chunks: ['newtab'],
+      template: path.join(__dirname, "src", "pages", "Newtab", "index.html"),
+      filename: "newtab.html",
+      chunks: ["newtab"],
       cache: false,
     }),
     new HtmlWebpackPlugin({
-      template: path.join(__dirname, 'src', 'pages', 'Options', 'index.html'),
-      filename: 'options.html',
-      chunks: ['options'],
+      template: path.join(__dirname, "src", "pages", "Options", "index.html"),
+      filename: "options.html",
+      chunks: ["options"],
       cache: false,
     }),
     new HtmlWebpackPlugin({
-      template: path.join(__dirname, 'src', 'pages', 'Popup', 'index.html'),
-      filename: 'popup.html',
-      chunks: ['popup'],
+      template: path.join(__dirname, "src", "pages", "Popup", "index.html"),
+      filename: "popup.html",
+      chunks: ["popup"],
       cache: false,
     }),
     new HtmlWebpackPlugin({
-      template: path.join(__dirname, 'src', 'pages', 'Devtools', 'index.html'),
-      filename: 'devtools.html',
-      chunks: ['devtools'],
+      template: path.join(__dirname, "src", "pages", "Devtools", "index.html"),
+      filename: "devtools.html",
+      chunks: ["devtools"],
       cache: false,
     }),
     new HtmlWebpackPlugin({
-      template: path.join(__dirname, 'src', 'pages', 'Panel', 'index.html'),
-      filename: 'panel.html',
-      chunks: ['panel'],
+      template: path.join(__dirname, "src", "pages", "Panel", "index.html"),
+      filename: "panel.html",
+      chunks: ["panel"],
       cache: false,
     }),
   ].filter(Boolean),
   infrastructureLogging: {
-    level: 'info',
+    level: "info",
   },
 };
 
-if (env.NODE_ENV === 'development') {
-  options.devtool = 'cheap-module-source-map';
+if (env.NODE_ENV === "development") {
+  options.devtool = "cheap-module-source-map";
 } else {
   options.optimization = {
     minimize: true,

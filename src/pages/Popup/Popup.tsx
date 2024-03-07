@@ -1,5 +1,5 @@
-import React from 'react';
-import './Popup.css';
+import React from "react";
+import "./Popup.css";
 
 const Popup = (): React.JSX.Element => {
   return (

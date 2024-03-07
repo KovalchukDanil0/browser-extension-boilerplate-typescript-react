@@ -1,6 +1,5 @@
-import React from 'react';
-import './Newtab.css';
-import './Newtab.scss';
+import React from "react";
+import "./Newtab.css";
 
 const Newtab = () => {
   return (

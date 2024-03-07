@@ -1,11 +1,13 @@
-import { Flowbite } from 'flowbite-react';
+import { Flowbite } from "flowbite-react";
 
 /** @type {import('tailwindcss').Config} */
-export default {
+const tailwind = {
   content: [
-    './src/**/*.{js,tsx, ts}',
-    'node_modules/flowbite-react/lib/esm/**/*.js',
+    "./src/**/*.{js,tsx, ts}",
+    "node_modules/flowbite-react/lib/esm/**/*.js",
   ],
-  darkMode: 'media',
+  darkMode: "media",
   plugins: [Flowbite],
 };
+
+export default tailwind;

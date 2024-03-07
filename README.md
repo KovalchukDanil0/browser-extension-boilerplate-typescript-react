@@ -1,6 +1,6 @@
 # Augmented Chrome / Firefox Extension Boilerplate with React 18, Flowbite, Webpack 5, Tailwind CSS 3 and WebExtension Polyfill
 
-![alt text for screen readers](/src/assets/img/icon-128.png 'Text to show on mouseover')
+![alt text for screen readers](/src/assets/img/icon-128.png "Text to show on mouseover")
 
 [![npm](https://img.shields.io/npm/v/chrome-extension-boilerplate-react)](https://www.npmjs.com/package/chrome-extension-boilerplate-react)
 [![npm-download](https://img.shields.io/npm/dw/chrome-extension-boilerplate-react)](https://www.npmjs.com/package/chrome-extension-boilerplate-react)
@@ -131,13 +131,13 @@ To this task this boilerplate import the file `./secrets.<THE-NODE_ENV>.js` on y
 ## ./secrets.development.js
 
 ```js
-export default { key: '123' };
+export default { key: "123" };
 ```
 
 ## ./src/popup.js
 
 ```js
-import secrets from 'secrets';
+import secrets from "secrets";
 ApiCall({ key: secrets.key });
 ```
 
