@@ -1,4 +1,5 @@
 import React from "react";
+import GreetingComponent from "../../containers/Greetings/GreetingComponent";
 import "./Popup.scss";
 
 export default function Popup() {
@@ -17,6 +18,7 @@ export default function Popup() {
         >
           Learn React!
         </a>
+        <GreetingComponent />
       </header>
     </div>
   );
