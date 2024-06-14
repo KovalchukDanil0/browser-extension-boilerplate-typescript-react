@@ -9,7 +9,7 @@ config.mode = "production";
 config.plugins?.push(
   new ZipPlugin({
     filename: `${packageInfo.name}-${packageInfo.version}.zip`,
-    path: path.join("", "../", "zip"),
+    path: path.join(__dirname, "../", "zip"),
   }) as unknown as WebpackPluginInstance,
 );
 
