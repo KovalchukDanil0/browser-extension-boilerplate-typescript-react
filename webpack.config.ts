@@ -11,10 +11,6 @@ import pkg from "./package.json";
 import { ConfigurationModeType } from "./src/shared";
 import env from "./utils/env";
 
-process.env.version = pkg.version;
-process.env.description = pkg.description;
-process.env.homepage_url = pkg.repository.url;
-
 const ASSET_PATH = process.env.ASSET_PATH || "/";
 
 const alias: { secrets?: string } = {};
