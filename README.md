@@ -1,4 +1,4 @@
-# Augmented Chrome / Firefox Extension Boilerplate with React 18, Flowbite, Webpack 5, Tailwind CSS 3 and WebExtension Polyfill
+# Browser extension boilerplate built with React, typescript, Daisyui, Webpack, Tailwind CSS and WebExtension Polyfill
 
 ![alt text for screen readers](/src/assets/img/icon-128.png "Text to show on mouseover")
 

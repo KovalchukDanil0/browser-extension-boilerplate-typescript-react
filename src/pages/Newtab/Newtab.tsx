@@ -1,7 +1,7 @@
 import React from "react";
-import "./Newtab.css";
+import "./Newtab.scss";
 
-const Newtab = () => {
+export default function NewTab() {
   return (
     <div className="App">
       <header className="App-header">
@@ -20,6 +20,4 @@ const Newtab = () => {
       </header>
     </div>
   );
-};
-
-export default Newtab;
+}

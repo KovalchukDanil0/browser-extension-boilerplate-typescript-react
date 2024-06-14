@@ -1,7 +1,7 @@
 import React from "react";
-import "./Popup.css";
+import "./Popup.scss";
 
-const Popup = (): React.JSX.Element => {
+export default function Popup() {
   return (
     <div className="App">
       <header className="App-header">
@@ -20,6 +20,4 @@ const Popup = (): React.JSX.Element => {
       </header>
     </div>
   );
-};
-
-export default Popup;
+}
