@@ -36,6 +36,9 @@ if (fileSystem.existsSync(secretsPath)) {
 }
 
 const isDevelopment = process.env.NODE_ENV !== "production";
+const isChrome = process.env.BROWSER === "chrome";
+
+const backgroundPageName = "background.bundle.js";
 
 const config: Configuration = {
   mode: (process.env.NODE_ENV || "development") as ConfigurationModeType,
@@ -155,6 +158,9 @@ const config: Configuration = {
                 version: pkg.version,
                 description: pkg.description,
                 homepage_url: pkg.repository.url,
+                background: isChrome
+                  ? { service_worker: backgroundPageName }
+                  : { page: backgroundPageName },
                 ...JSON.parse(content.toString()),
               }),
             );

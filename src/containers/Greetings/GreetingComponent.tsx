@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import icon from "../../assets/img/icon-128.png";
 
 class GreetingComponent extends Component {
   state = {
@@ -10,7 +9,7 @@ class GreetingComponent extends Component {
     return (
       <div>
         <p>Hello, {this.state.name}!</p>
-        <img src={icon} alt="extension icon" />
+        <img src="icon-128.png" alt="extension icon" />
       </div>
     );
   }
