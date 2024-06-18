@@ -1,18 +1,14 @@
-import React, { Component } from "react";
+import React, { ComponentProps } from "react";
 
-class GreetingComponent extends Component {
-  state = {
-    name: "dev",
-  };
-
-  render() {
-    return (
-      <div>
-        <p>Hello, {this.state.name}!</p>
-        <img src="icon-128.png" alt="extension icon" />
-      </div>
-    );
-  }
+interface Props extends ComponentProps<"div"> {
+  name?: string;
 }
 
-export default GreetingComponent;
+export default function GreetingComponent({ name }: Readonly<Props>) {
+  return (
+    <div>
+      <p>Hello, {name}!</p>
+      <img src="icon-128.png" alt="extension icon" />
+    </div>
+  );
+}

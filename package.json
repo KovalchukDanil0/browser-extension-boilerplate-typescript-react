@@ -2,15 +2,16 @@
   "name": "browser-extension-boilerplate-typescript-react",
   "version": "1.0",
   "description": "Browser extension boilerplate built with React, typescript, Daisyui, Webpack, Tailwind CSS and WebExtension Polyfill",
-  "license": "MIT",
+  "license": "GPL-3.0-only",
   "repository": {
     "type": "git",
     "url": "https://github.com/KovalchukDanil0/browser-extension-boilerplate-typescript-react.git"
   },
   "scripts": {
+    "dev": "tsc src/bin.ts --outFile bin/index.js",
     "build-chrome": "NODE_ENV=production BROWSER=chrome ts-node utils/build.ts",
     "build-firefox": "NODE_ENV=production BROWSER=firefox ts-node utils/build.ts",
-    "start": "NODE_ENV=development ts-node utils/webserver.ts",
+    "start": "NODE_ENV=development BROWSER=chrome ts-node utils/webserver.ts",
     "prettier": "prettier --write '**/*.{js,jsx,ts,tsx,json,css,scss,md}'"
   },
   "dependencies": {
@@ -22,12 +23,15 @@
     "react-daisyui": "^5.0.0",
     "react-dom": "^18.3.1",
     "tailwindcss": "^3.4.4",
+    "tailwindcss-animated": "1.1.0",
     "ts-node": "^10.9.2",
     "webextension-polyfill": "^0.10.0"
   },
+  "bin": "./bin/index.js",
   "devDependencies": {
     "@babel/core": "^7.24.7",
-    "@babel/plugin-proposal-class-properties": "^7.18.6",
+    "@babel/eslint-parser": "7.24.7",
+    "@babel/plugin-transform-class-properties": "7.24.7",
     "@babel/preset-env": "^7.24.7",
     "@babel/preset-react": "^7.24.7",
     "@pmmmwh/react-refresh-webpack-plugin": "^0.5.15",
@@ -37,7 +41,6 @@
     "@types/react-dom": "^18.3.0",
     "@types/webextension-polyfill": "^0.10.7",
     "@types/zip-webpack-plugin": "^3.0.6",
-    "babel-eslint": "^10.1.0",
     "babel-loader": "^9.1.3",
     "babel-preset-react-app": "^10.0.1",
     "clean-webpack-plugin": "^4.0.0",
@@ -66,7 +69,7 @@
     "style-loader": "^3.3.4",
     "terser-webpack-plugin": "^5.3.10",
     "ts-loader": "^9.5.1",
-    "type-fest": "^4.20.0",
+    "type-fest": "^4.20.1",
     "typescript": "^5.4.5",
     "webpack": "^5.92.0",
     "webpack-cli": "^5.1.4",

@@ -1,10 +1,13 @@
 import React from "react";
-import "./Options.scss";
 
 interface Props {
   title: string;
 }
 
 export default function Options({ title }: Readonly<Props>) {
-  return <div className="OptionsContainer">{title} Page</div>;
+  return (
+    <div className="flex h-4 w-full items-center justify-center text-4xl">
+      {title} Page
+    </div>
+  );
 }

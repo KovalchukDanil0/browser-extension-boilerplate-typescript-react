@@ -1,6 +1,6 @@
-# Browser extension boilerplate built with React, typescript, Daisyui, Webpack, Tailwind CSS and WebExtension Polyfill
+# Browser extension boilerplate built with React, Typescript, Daisyui, Webpack, Tailwind CSS and WebExtension Polyfill
 
-![alt text for screen readers](/src/assets/img/icon-128.png "Text to show on mouseover")
+![Extension logo](/src/assets/img/icon-128.png)
 
 [![npm](https://img.shields.io/npm/v/chrome-extension-boilerplate-react)](https://www.npmjs.com/package/chrome-extension-boilerplate-react)
 [![npm-download](https://img.shields.io/npm/dw/chrome-extension-boilerplate-react)](https://www.npmjs.com/package/chrome-extension-boilerplate-react)

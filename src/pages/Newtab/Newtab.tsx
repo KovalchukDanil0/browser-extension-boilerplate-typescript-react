@@ -1,15 +1,14 @@
 import React from "react";
-import "./Newtab.scss";
 
 export default function NewTab() {
   return (
-    <div className="App">
-      <header className="App-header">
+    <div className="text-center">
+      <div className="flex h-full flex-col items-center justify-center text-base text-white">
         <p>
           Edit <code>src/pages/Newtab/Newtab.js</code> and save to reload.
         </p>
         <a
-          className="App-link"
+          className="pointer-events-none h-8 animate-spin"
           href="https://reactjs.org"
           target="_blank"
           rel="noopener noreferrer"
@@ -17,7 +16,7 @@ export default function NewTab() {
           Learn React!
         </a>
         <h6>The color of this paragraph is defined using SASS.</h6>
-      </header>
+      </div>
     </div>
   );
 }
