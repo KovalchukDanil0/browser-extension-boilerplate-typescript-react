@@ -1,1 +1,1 @@
-export type ConfigurationModeType = "production" | "development" | "none";
+export type ConfigurationModeType = "production" | "development";

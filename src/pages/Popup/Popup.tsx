@@ -17,6 +17,7 @@ export default function Popup() {
         >
           Learn React!
         </a>
+
         <GreetingComponent />
       </div>
     </div>
