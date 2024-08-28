@@ -1,10 +1,6 @@
-import { ConfigurationModeType } from "../src/shared";
-
 declare namespace NodeJS {
   export interface ProcessEnv {
-    ASSET_PATH: string;
-    NODE_ENV: ConfigurationModeType;
+    NODE_ENV: "production" | "development";
     BROWSER: "chrome" | "firefox";
-    PORT: string;
   }
 }

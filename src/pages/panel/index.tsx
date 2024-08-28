@@ -1,9 +1,8 @@
 import React from "react";
 import { createRoot } from "react-dom/client";
-import Panel from "./Panel";
-
-import "../../assets/css/tailwind.scss";
+import "../../assets/scss/tailwind.scss";
 import "./index.scss";
+import Panel from "./Panel";
 
 const container = document.getElementById("app-container");
 if (!container) {

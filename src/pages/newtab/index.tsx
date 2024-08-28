@@ -1,9 +1,8 @@
 import React from "react";
 import { createRoot } from "react-dom/client";
-import Options from "./Options";
-
-import "../../assets/css/tailwind.scss";
+import "../../assets/scss/tailwind.scss";
 import "./index.scss";
+import NewTab from "./Newtab";
 
 const container = document.getElementById("app-container");
 if (!container) {
@@ -11,4 +10,4 @@ if (!container) {
 }
 
 const root = createRoot(container);
-root.render(<Options title={"Settings"} />);
+root.render(<NewTab />);

@@ -1,16 +1,18 @@
 import daisyui from "daisyui";
 import { Config } from "tailwindcss";
-// @ts-ignore
-import tailwindcssAnimated from "tailwindcss-animated";
 
 const tailwind: Config = {
   content: [
-    "./src/**/*.{js,tsx, ts}",
+    "./index.html",
+    "./src/**/*.{ts,tsx}",
     "node_modules/daisyui/dist/**/*.js",
     "node_modules/react-daisyui/dist/**/*.js",
   ],
-  darkMode: "class",
-  plugins: [daisyui, tailwindcssAnimated],
+  theme: {
+    extend: {},
+  },
+  darkMode: "media",
+  plugins: [daisyui],
 };
 
 export default tailwind;
