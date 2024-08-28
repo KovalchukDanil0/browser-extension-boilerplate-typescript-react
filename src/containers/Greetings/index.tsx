@@ -7,7 +7,7 @@ interface Props extends ComponentProps<"div"> {
 export default function GreetingComponent({ name }: Readonly<Props>) {
   return (
     <div>
-      <p>Hello, {name}!</p>
+      <p className="text-xl uppercase">Hello, {name}!</p>
       <img src="/icon-128.png" alt="extension icon" />
     </div>
   );
