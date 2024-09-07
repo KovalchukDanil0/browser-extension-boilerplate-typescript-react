@@ -38,7 +38,7 @@ export default function Popup() {
           <code
             className={twMerge(
               "mb-6 block max-w-full break-inside-avoid overflow-auto border border-l-4 border-solid",
-              "border-slate-800 border-l-orange-400 bg-slate-700 px-4 py-4 text-lg leading-3 text-red-700",
+              "border-slate-800 border-l-orange-400 bg-slate-200 px-4 py-4 text-lg leading-3 text-red-700 dark:bg-slate-700",
             )}
           >
             src/pages/popup/Popup.tsx

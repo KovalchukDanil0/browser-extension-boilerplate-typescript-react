@@ -8,7 +8,7 @@
     "incremental": true,
 
     /* Bundler mode */
-    "moduleResolution": "bundler",
+    "moduleResolution": "Bundler",
     "allowImportingTsExtensions": true,
     "isolatedModules": true,
     "moduleDetection": "force",
@@ -20,5 +20,11 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true
   },
-  "include": ["vite.config.mts", "rollup.config.ts", "@types/**/*.d.ts"]
+  "include": [
+    "*.config.mts",
+    "*.config.ts",
+    "*.config.mjs",
+    "@types/**/*.d.ts"
+  ],
+  "exclude": ["node_modules"]
 }

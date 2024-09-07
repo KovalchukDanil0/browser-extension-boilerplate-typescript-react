@@ -1,44 +1,49 @@
-import { defineConfig } from "vite";
+import { crx } from "@crxjs/vite-plugin";
+import react from "@vitejs/plugin-react-swc";
+import { defineConfig, Plugin } from "vite";
 import { ViteImageOptimizer } from "vite-plugin-image-optimizer";
-import viteCopyTransformJson from "vite-plugin-transform-json";
 import zipPack from "vite-plugin-zip-pack";
-import pkg from "./package.json";
+import manifest from "./manifest.config";
+import { name, version } from "./package.json";
 import rollupOptions from "./rollup.config";
 
-const isProduction = process.env.NODE_ENV === "production";
+const isWatch = process.argv.includes("--watch");
+
+// ! ADD SUPPORT BUILD TO FIREFOX
 const isChrome = process.env.BROWSER === "chrome";
+
+const viteManifestHackIssue846: Plugin & {
+  renderCrxManifest: (manifest: unknown, bundle: any) => void;
+} = {
+  // Workaround from https://github.com/crxjs/chrome-extension-tools/issues/846#issuecomment-1861880919.
+  name: "manifestHackIssue846",
+  renderCrxManifest(_manifest, bundle) {
+    bundle["manifest.json"] = bundle[".vite/manifest.json"];
+    bundle["manifest.json"].fileName = "manifest.json";
+    delete bundle[".vite/manifest.json"];
+  },
+};
 
 export default defineConfig({
   plugins: [
-    viteCopyTransformJson({
-      srcPath: "src/manifest.json",
-      async transformedProps() {
-        const backgroundPagePath = "assets/background.js";
+    react(),
 
-        return {
-          version: pkg.version,
-          description: pkg.description,
-          homepage_url: pkg.repository.url || "",
-          background: isChrome
-            ? { service_worker: backgroundPagePath }
-            : { page: backgroundPagePath },
-        };
+    viteManifestHackIssue846,
+    crx({
+      manifest,
+      contentScripts: {
+        injectCss: true,
       },
     }),
-    isProduction && [
-      ViteImageOptimizer({
-        /* pass your config */
-      }),
-      zipPack({ outDir: "zip", outFileName: `${pkg.name}.zip` }),
+
+    !isWatch && [
+      ViteImageOptimizer(),
+      zipPack({ outDir: "zip", outFileName: `${name}-${version}.zip` }),
     ],
   ],
   build: {
+    minify: "esbuild",
     emptyOutDir: true,
-    terserOptions: {
-      format: {
-        comments: false,
-      },
-    },
     rollupOptions,
   },
   esbuild: { legalComments: "none" },

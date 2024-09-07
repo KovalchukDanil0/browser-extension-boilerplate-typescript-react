@@ -1,9 +1,8 @@
 import daisyui from "daisyui";
 import { Config } from "tailwindcss";
 
-const tailwind: Config = {
+export default {
   content: [
-    "./index.html",
     "./src/**/*.{ts,tsx}",
     "node_modules/daisyui/dist/**/*.js",
     "node_modules/react-daisyui/dist/**/*.js",
@@ -13,6 +12,4 @@ const tailwind: Config = {
   },
   darkMode: "media",
   plugins: [daisyui],
-};
-
-export default tailwind;
+} satisfies Config;
