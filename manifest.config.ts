@@ -26,7 +26,6 @@ export default defineManifest({
     {
       matches: ["<all_urls>"],
       js: ["src/pages/content/index.ts"],
-      css: ["assets/content.css"],
     },
   ],
   // @ts-ignore
